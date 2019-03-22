@@ -1,6 +1,6 @@
 <template>
   <b-button class="BaseBtn" size="sm" variant="primary">
-    <slot></slot>
+   <slot></slot>
   </b-button>
 </template>
 

@@ -5,7 +5,7 @@
 </template>
 
 
-<script scoped>
+<script>
   export default {
   name: 'BaseInput',
   props: {
@@ -13,13 +13,11 @@
   },  
   data() {
       return {
-    // val: 'ddfd'
-    toParent: 'ddd1'
 }
   }
   }
 </script>
 
 
-<style>
+<style scoped>
 </style>

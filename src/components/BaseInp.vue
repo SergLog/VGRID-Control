@@ -1,5 +1,7 @@
 <template>
-  <b-form-input size="sm" type="text" value="d"></b-form-input>
+<div>
+  <b-form-input size="sm" type="text" v-bind:value="val"></b-form-input>
+  </div>
  </template>
 
 
@@ -7,7 +9,7 @@
   export default {
   name: 'BaseInput',
   props: {
-//    val: String
+    val: String
   },  
   data() {
       return {

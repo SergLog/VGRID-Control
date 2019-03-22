@@ -10,7 +10,8 @@
         <b-card-body class="p-0">
           <b-table :fields="fields" :items="item.params" thead-class="hide_header">
             <template slot="inp" slot-scope="data">
-              <div :is="item.params[data.index].controll" :value="item.params[data.index].val"></div>
+              <div :is="item.params[data.index].controll" :val="item.params[data.index].val" :options="b_select_options"></div>
+              <div> {{ item.params[data.index].val }} </div>
               <!-- item.params[data.index].controll - you can add any controll using slot, set the type of contoll in itmes array  - -->
             </template>
             <template slot="combobox" slot-scope="data">
@@ -22,8 +23,8 @@
       </b-collapse>
     </b-card>
 
-    <b-select v-model="selectedvalue" :options="iskl"></b-select>
- <div> {{ selectedvalue }} </div>
+<base-inp val="hello!"></base-inp>
+
 <div>
  </div>
 
@@ -68,7 +69,7 @@ export default {
         { value: ">", text: 'Больше' },
         { value: "<", text: 'Меньше' }
       ],
-      iskl: [
+      b_select_options: [
         {value: 1, text: 'Исключен'},
         {value: 2, text: 'Не исключен'}
       ],

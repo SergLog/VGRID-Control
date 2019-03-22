@@ -10,8 +10,8 @@
         <b-card-body class="p-0">
           <b-table :fields="fields" :items="item.params" thead-class="hide_header">
             <template slot="inp" slot-scope="data">
-              <div :is="item.params[data.index].controll" :val="item.params[data.index].val"></div>{{ fromChild }}
-              <!-- item.params[data.index].controll - you can add any controll by slot, type of contoll - in itmes array  - -->
+              <div :is="item.params[data.index].controll" :value="item.params[data.index].val"></div>
+              <!-- item.params[data.index].controll - you can add any controll using slot, set the type of contoll in itmes array  - -->
             </template>
             <template slot="combobox" slot-scope="data">
               <b-select v-model="item.params[data.index].selected" :options="combobox_items" class="form-control-sm"></b-select>              
@@ -21,6 +21,9 @@
         </b-card-body>
       </b-collapse>
     </b-card>
+
+    <b-select v-model="selectedvalue" :options="iskl"></b-select>
+ <div> {{ selectedvalue }} </div>
 <div>
  </div>
 
@@ -41,11 +44,12 @@ export default {
   },
   data () {
     return {
+      selectedvalue: 0,
       items:
         [{"collapseId": "1",
         "collapseName": "Объект учета",        
         "params": [
-          { "selected": '%', "dbfield": "RNO_NUM", "name": "Реестровый номер", "controll": "BaseBtn", "val": "Введите значение" },
+          { "selected": '%', "dbfield": "RNO_NUM", "name": "Реестровый номер", "controll": "b-select", "val": "Введите значение" },
           { "selected": '%', "dbfield": "ISKL", "name": "Исключен", "controll": "BaseInp", "val": "ssf" },
           { "selected": '%', "dbfield": "TTT", "name": "Свободен", "controll": "BaseInp", "val": "sf" },
           { "selected": '%', "dbfield": "RNO_LOA_ID", "name": "Тип", "controll": "BaseInp", "val": "ssf" }]
@@ -63,6 +67,10 @@ export default {
         { value: "=", text: 'Равно' },
         { value: ">", text: 'Больше' },
         { value: "<", text: 'Меньше' }
+      ],
+      iskl: [
+        {value: 1, text: 'Исключен'},
+        {value: 2, text: 'Не исключен'}
       ],
           fields: [
          { key: 'name', label: 'name',  },

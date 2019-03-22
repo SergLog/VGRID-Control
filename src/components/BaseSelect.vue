@@ -1,13 +1,14 @@
 <template>
-  <b-form-input size="sm" type="text" value="d"></b-form-input>
+<b-select :options="options"></b-select>
+<!-- <b-select v-model="selectedvalue" :options="options"></b-select> -->
  </template>
 
 
 <script>
   export default {
-  name: 'BaseInput',
+  name: 'BaseSelect',
   props: {
-//    val: String
+    options: []
   },  
   data() {
       return {

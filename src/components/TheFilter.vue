@@ -10,9 +10,10 @@
           <b-table :fields="fields" :items="item.params" thead-class="hide_header">
             <template slot="inp" slot-scope="data">
               
-              <div :is="item.params[data.index].controll" :value.sync="item.params[data.index].val"></div>
+              <div :is="item.params[data.index].controll" :value.sync="item.params[data.index].val" :options = "item.params[data.index].SelectOptions"></div>
               <!-- :value.sync - two-way binding” for a prop value passed to controll -->
               <!-- item.params[data.index].controll - you can add any controll using slot, set the type of contoll in itmes array  - -->
+              {{ item.params[data.index].val }}
             </template>
             <template slot="combobox" slot-scope="data">
               <b-select v-model="item.params[data.index].selected" :options="combobox_items" class="form-control-sm"></b-select>              
@@ -31,9 +32,10 @@
 
 import BaseBtn from './BaseBtn.vue'
 import BaseInp from './BaseInp.vue'
+import BaseSelect from './BaseSelect.vue'
 
 export default {
-  components: { BaseBtn, BaseInp },
+  components: { BaseBtn, BaseInp, BaseSelect },
   name: 'HelloWorld',
   props: {
     msg: String
@@ -46,10 +48,10 @@ export default {
         [{"collapseId": "1",
         "collapseName": "Объект учета",        
         "params": [
-          { "selected": '%', "dbfield": "RNO_NUM", "name": "Реестровый номер", "controll": "b-select", "val": "" },
-          { "selected": '%', "dbfield": "ISKL", "name": "Исключен", "controll": "BaseInp", "val": "" },
-          { "selected": '%', "dbfield": "TTT", "name": "Свободен", "controll": "BaseInp", "val": "" },
-          { "selected": '%', "dbfield": "RNO_LOA_ID", "name": "Тип", "controll": "BaseInp", "val": "" }]
+          { "selected": '%', "dbfield": "RNO_NUM", "name": "Реестровый номер", "controll": "BaseInp", "SelectOptions": "", "val": "", },
+          { "selected": '%', "dbfield": "ISKL", "name": "Исключен", "controll": "BaseSelect", "SelectOptions": [{value: 1, text: 'Исключен'},{value: 2, text: 'Не исключен'}], "val": "test" },
+          { "selected": '%', "dbfield": "TTT", "name": "Свободен", "controll": "BaseInp", "SelectOptions": "", "val": "" },
+          { "selected": '%', "dbfield": "RNO_LOA_ID", "name": "Тип", "controll": "BaseInp", "SelectOptions": "", "val": "" }]
         },
         {"collapseId": "2",
         "collapseName": "Свидетельство",
@@ -65,7 +67,7 @@ export default {
         { value: ">", text: 'Больше' },
         { value: "<", text: 'Меньше' }
       ],
-      b_select_options: [
+      select_options: [
         {value: 1, text: 'Исключен'},
         {value: 2, text: 'Не исключен'}
       ],

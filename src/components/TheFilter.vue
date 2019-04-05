@@ -1,7 +1,6 @@
 <template>
-
  <div role="tablist" class="thefilter">
-    <b-card no-body class="mb-1 small" v-for="item in items" :key="item.id">
+   <b-card no-body class="mb-1 small" v-for="item in items" :key="item.id">
       <b-card-header header-tag="header" class="p-1" role="tab">
         <b-btn block href="#" v-b-toggle="item.collapseId" variant="primary" size="sm">{{ item.collapseName }}</b-btn>
       </b-card-header> 
@@ -10,8 +9,9 @@
         <b-card-body class="p-0">
           <b-table :fields="fields" :items="item.params" thead-class="hide_header">
             <template slot="inp" slot-scope="data">
-              <div :is="item.params[data.index].controll" :val="item.params[data.index].val" :options="b_select_options"></div>
-              <div> {{ item.params[data.index].val }} </div>
+              
+              <div :is="item.params[data.index].controll" :value.sync="item.params[data.index].val"></div>
+              <!-- :value.sync - two-way binding” for a prop value passed to controll -->
               <!-- item.params[data.index].controll - you can add any controll using slot, set the type of contoll in itmes array  - -->
             </template>
             <template slot="combobox" slot-scope="data">
@@ -22,11 +22,6 @@
         </b-card-body>
       </b-collapse>
     </b-card>
-
-<base-inp val="hello!"></base-inp>
-
-<div>
- </div>
 
 
   </div>
@@ -46,14 +41,15 @@ export default {
   data () {
     return {
       selectedvalue: 0,
+      testval: 'new',
       items:
         [{"collapseId": "1",
         "collapseName": "Объект учета",        
         "params": [
-          { "selected": '%', "dbfield": "RNO_NUM", "name": "Реестровый номер", "controll": "b-select", "val": "Введите значение" },
-          { "selected": '%', "dbfield": "ISKL", "name": "Исключен", "controll": "BaseInp", "val": "ssf" },
-          { "selected": '%', "dbfield": "TTT", "name": "Свободен", "controll": "BaseInp", "val": "sf" },
-          { "selected": '%', "dbfield": "RNO_LOA_ID", "name": "Тип", "controll": "BaseInp", "val": "ssf" }]
+          { "selected": '%', "dbfield": "RNO_NUM", "name": "Реестровый номер", "controll": "b-select", "val": "" },
+          { "selected": '%', "dbfield": "ISKL", "name": "Исключен", "controll": "BaseInp", "val": "" },
+          { "selected": '%', "dbfield": "TTT", "name": "Свободен", "controll": "BaseInp", "val": "" },
+          { "selected": '%', "dbfield": "RNO_LOA_ID", "name": "Тип", "controll": "BaseInp", "val": "" }]
         },
         {"collapseId": "2",
         "collapseName": "Свидетельство",
@@ -80,6 +76,11 @@ export default {
         //  { key: 'btn', label: 'btn' }
        ]
     }
+  }
+  ,methods: {
+      change: function(value) {
+      this.testval = value;
+      }
   }
 }
 </script>

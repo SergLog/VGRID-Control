@@ -1,19 +1,22 @@
 <template>
-<div>
-  <b-form-input size="sm" type="text" v-bind:value="val"></b-form-input>
+  <div>
+    <b-input v-model="val" v-on:input="onValueChange"></b-input>
   </div>
  </template>
-
 
 <script>
   export default {
   name: 'BaseInput',
   props: {
-    val: String
+    value: null
   },  
   data() {
-      return {
-}
+      return { val: this.value}
+  },
+  methods: {
+    onValueChange: function() {
+      this.$emit('update:value', this.val);
+    }
   }
   }
 </script>
